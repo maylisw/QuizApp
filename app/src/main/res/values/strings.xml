@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quiz App</string>
+    <string name="app_name">True False Quiz</string>
     <string name="next">Next</string>
     <string name="t">True</string>
     <string name="f">False</string>
