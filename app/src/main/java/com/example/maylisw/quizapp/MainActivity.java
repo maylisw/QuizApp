@@ -21,15 +21,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listenersOnClick();
         createQuestions();
         x = 0;
+        question.setText(questions.get(x).getQuestionText());
     }
 
     private void createQuestions() {
         questions = new ArrayList<>();
-        questions.add(new Questions("Le Tour de France occurs twice per yer.", false));
-        questions.add(new Questions("France is better than The United States of America in every way.", true));
-        questions.add(new Questions("The Vatican City is the capital the United States.", false));
-        questions.add(new Questions("France is the world's capital of posthumous marriage", true));
-        questions.add(new Questions("Isabelle is the best little sister", true));
+        questions.add(new Questions(getString(R.string.race), false));
+        questions.add(new Questions(getString(R.string.better), true));
+        questions.add(new Questions(getString(R.string.capital), false));
+        questions.add(new Questions(getString(R.string.marriage), true));
+        questions.add(new Questions(getString(R.string.sister), true));
     }
 
     private void listenersOnClick() {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 checkAnswer(x, true);
                 break;
             case R.id.button_next:
-                question.setText((CharSequence) questions.get(x));
+                question.setText(questions.get(x).getQuestionText());
                 x++;
                 break;
         }

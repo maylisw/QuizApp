@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Interro Vrai ou Faux</string>
+    <string name="f">Faux</string>
+    <string name="next">Prochain</string>
+    <string name="t">Vrai</string>
+    <string name="better">La France est le meilleur que des Etats-Unis en chaque façon.</string>
+    <string name="capital">Le Vatican City est le capital des Etats-Unis.</string>
+    <string name="marriage">Le capital du monde pour le mariage posthume est la France.</string>
+    <string name="race">Le Tour de France se produit deux fois par an.</string>
+    <string name="sister">Isabelle est le meilleur petite sœur.</string>
+</resources>
