@@ -11,5 +11,6 @@
     <string name="sister">Isabelle est le meilleur petite sœur.</string>
     <string name="correct">Correct</string>
     <string name="incorrect">Incorrect</string>
-    <string name="Score">Score</string>
+    <string name="score">Score</string>
+    <string name="playAgain">Rejourer</string>
 </resources>

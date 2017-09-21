@@ -1,6 +1,9 @@
 package com.example.maylisw.quizapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,16 +18,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView question;
     private ArrayList<Questions> questions;
     private int questionsNumber, score;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         wireWidgets();
         listenersOnClick();
         createQuestions();
         questionsNumber = 0;
         question.setText(questions.get(questionsNumber).getQuestionText());
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+
     }
 
     private void createQuestions() {
@@ -65,8 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else {
                     Intent i = new Intent(this, Main2Activity.class);
-                    i.putExtra("Score", score);
                     startActivity(i);
+                    editor.putInt("score", score);
+                    editor.commit();
                 }
                 question.setText(questions.get(questionsNumber).getQuestionText());
                 break;
@@ -82,5 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, getString(R.string.incorrect), Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }
 //yeah but there
