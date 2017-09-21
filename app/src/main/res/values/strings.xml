@@ -3,9 +3,12 @@
     <string name="next">Next</string>
     <string name="t">True</string>
     <string name="f">False</string>
-    <string name= "sister">Isabelle is the best little sister.</string>
-    <string name ="marriage">France is the world\'s capital of posthumous marriage.</string>
-    <string name ="capital">The Vatican City is the capital the United States.</string>
+    <string name="sister">Isabelle is the best little sister.</string>
+    <string name="marriage">France is the world\'s capital of posthumous marriage.</string>
+    <string name="capital">The Vatican City is the capital the United States.</string>
     <string name="better">France is better than The United States of America in every way.</string>
     <string name="race">Le Tour de France occurs twice per yer.</string>
+    <string name="correct">Correct</string>
+    <string name="incorrect">Incorrect</string>
+    <string name="score">Score</string>
 </resources>

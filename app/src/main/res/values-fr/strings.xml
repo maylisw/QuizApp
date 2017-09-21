@@ -9,4 +9,7 @@
     <string name="marriage">Le capital du monde pour le mariage posthume est la France.</string>
     <string name="race">Le Tour de France se produit deux fois par an.</string>
     <string name="sister">Isabelle est le meilleur petite sœur.</string>
+    <string name="correct">Correct</string>
+    <string name="incorrect">Incorrect</string>
+    <string name="Score">Score</string>
 </resources>
