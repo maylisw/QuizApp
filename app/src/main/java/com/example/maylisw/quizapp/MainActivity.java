@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,13 +15,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static android.app.PendingIntent.getActivity;
+import static android.util.Log.*;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button trueButton, falseButton, nextButton;
     private TextView question;
     private ArrayList<Questions> questions;
     private int questionsNumber, score;
-    private SharedPreferences sharedPref;
-    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listenersOnClick();
         createQuestions();
         questionsNumber = 0;
+        score = 0;
         question.setText(questions.get(questionsNumber).getQuestionText());
-        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        editor = sharedPref.edit();
-
-
     }
 
     private void createQuestions() {
@@ -62,22 +62,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.button_false:
+                falseButton.setEnabled(false);
+                trueButton.setEnabled(false);
                 checkAnswer(questionsNumber, false);
                 break;
             case R.id.button_true:
+                falseButton.setEnabled(false);
+                trueButton.setEnabled(false);
                 checkAnswer(questionsNumber, true);
                 break;
             case R.id.button_next:
-                if(questionsNumber < questions.size()){
+                if(questionsNumber < questions.size() - 1){
                     questionsNumber ++;
+                    question.setText(questions.get(questionsNumber).getQuestionText());
+                    falseButton.setEnabled(true);
+                    trueButton.setEnabled(true);
                 }
                 else {
+                    Log.d("message 1", "Score: "+score);
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);;
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putInt(getString(R.string.score), score);
+                    editor.commit();
+                    editor.apply();
                     Intent i = new Intent(this, Main2Activity.class);
                     startActivity(i);
-                    editor.putInt("score", score);
-                    editor.commit();
                 }
-                question.setText(questions.get(questionsNumber).getQuestionText());
                 break;
         }
     }
