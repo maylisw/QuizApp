@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView question;
     private ArrayList<Questions> questions;
     private int questionsNumber, score;
+    public static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         wireWidgets();
         listenersOnClick();
         createQuestions();
-        questionsNumber = 0;
+        //check if we are resuming
+        if(savedInstanceState != null){
+            questionsNumber = savedInstanceState.getInt(getString(R.string.QNo), 0);
+        } else {
+            questionsNumber = 0;
+        }
         score = 0;
         question.setText(questions.get(questionsNumber).getQuestionText());
     }
@@ -101,7 +108,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, getString(R.string.incorrect), Toast.LENGTH_SHORT).show();
         }
     }
+    //prevents a bug if device is rotated
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d(TAG, "onSaveInstanceState: method fired");
+        outState.putInt(getString(R.string.QNo), questionsNumber);
+    }
 
+    //Android Lifecycles
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: method fired");
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: method fired");
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.d(TAG, "onResume: method fired");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: method fired");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: method fired");
+    }
 }
 //yeah but there
